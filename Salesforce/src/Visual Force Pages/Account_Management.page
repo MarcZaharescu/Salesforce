@@ -1,0 +1,583 @@
+<apex:page Controller="dataListCon"  tabstyle="account" sidebar="false">
+                     
+
+                <apex:pageBlock id="title" title="{!username}'s Dashboard">
+               </apex:pageBlock>
+               
+               
+                   <apex:form >
+                            <apex:selectList value="{!userValue}" size="1">
+                               <apex:selectOptions value="{!userOptions}"/>
+
+                                 </apex:selectList>
+                                   <apex:commandButton value="Selected User" action="{!updateUserValue}" rerender="title,all" />
+                         </apex:form>
+
+               
+   
+         <apex:tabPanel switchType="client" id="all">
+ 
+
+                    
+                      <apex:tab label="Clients (High Potential)" >
+                       <apex:pageBlock title="Accounts">
+                        
+                       
+                        
+                        
+                        <apex:form id="form1">
+                        
+                    
+                        <apex:pageBlockTable value="{!accountsT1}" var="a" cellPadding="5" border="3" id="accountslisttier1">
+                
+                                    
+                                   <apex:column >
+                                 <apex:facet name="header">   
+                                <apex:commandLink action="{!ViewDataAccountsT1}" value="Account Name{!IF(sortExpression=='name',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort" rerender="accountslisttier1">
+                                 <apex:param value="name" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                </apex:commandLink>
+                                </apex:facet>
+                                <a href="/{!a.Id}" id="{!a.Id}" onblur="LookupHoverDetail.getHover('{!a.Id}').hide();" onfocus="LookupHoverDetail.getHover('{!a.Id}', '/{!a.Id}/m?retURL=%2F{!a.Id}&isAjaxRequest=1').show();" onmouseout="LookupHoverDetail.getHover('{!a.Id}').hide();" onmouseover="LookupHoverDetail.getHover('{!a.Id}', '/{!a.Id}/m?retURL=%2F{!a.Id}&isAjaxRequest=1').show();">{!a.Name}</a>                    
+                                  </apex:column>
+                                            
+                                        
+                                    <apex:column value="{!a.Client_Value__c}">
+                                 <apex:facet name="header">   
+                                <apex:commandLink action="{!ViewDataAccountsT1}" value="Client Value{!IF(sortExpression=='Client_Value__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort1" rerender="accountslisttier1">
+                                <apex:param value="Client_Value__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                </apex:commandLink>
+                                </apex:facet>
+                                   </apex:column>         
+                                                    
+                         
+                                  <apex:column value="{!a.Active_L12M__c}">
+                                <apex:facet name="header">   
+                               <apex:commandLink action="{!ViewDataAccountsT1}" value="Active L12M{!IF(sortExpression=='Active_L12M__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort2" rerender="accountslisttier1">
+                               <apex:param value="Active_L12M__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                               </apex:commandLink>
+                               </apex:facet>
+                                 </apex:column>         
+                                                          
+                                    
+                                    
+                                  <apex:column value="{!a.Revenue_To_Date__c}">
+                                <apex:facet name="header">   
+                               <apex:commandLink action="{!ViewDataAccountsT1}" value="Revenue To Date{!IF(sortExpression=='Revenue_To_Date__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort3" rerender="accountslisttier1">
+                               <apex:param value="Revenue_To_Date__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                               </apex:commandLink>
+                               </apex:facet>
+                                 </apex:column>       
+                                  
+                                  
+                                  
+                                  <apex:column value="{!a.Average_Opportunity_Value__c}">
+                                <apex:facet name="header">   
+                               <apex:commandLink action="{!ViewDataAccountsT1}" value="Average Opportunity Value{!IF(sortExpression=='Average_Opportunity_Value__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort4" rerender="accountslisttier1">
+                               <apex:param value="Average_Opportunity_Value__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                               </apex:commandLink>
+                               </apex:facet>
+                                 </apex:column>       
+                                  
+                                  
+                                  <apex:column value="{!a.OpportunitiesClosed__c}">
+                                <apex:facet name="header">   
+                               <apex:commandLink action="{!ViewDataAccountsT1}" value="Opportunities Closed{!IF(sortExpression=='OpportunitiesClosed__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort5" rerender="accountslisttier1">
+                               <apex:param value="OpportunitiesClosed__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                               </apex:commandLink>
+                               </apex:facet>
+                                 </apex:column>       
+                                  
+                                  
+                                  
+                                  
+                                   <apex:column value="{!a.Opportunity_Win_Ratio__c}">
+                                <apex:facet name="header">   
+                               <apex:commandLink action="{!ViewDataAccountsT1}" value="Opportunity Win Ratio{!IF(sortExpression=='Opportunity_Win_Ratio__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort6" rerender="accountslisttier1">
+                               <apex:param value="Opportunity_Win_Ratio__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                               </apex:commandLink>
+                               </apex:facet>
+                                 </apex:column>       
+                                    
+                                   </apex:pageBlockTable>
+                
+                             
+                                   </apex:form>  
+                        </apex:pageBlock>
+                
+                
+                        <apex:detail subject="{!$CurrentPage.parameters.cid}" relatedList="false" title="false"/>
+                    </apex:tab>
+                    
+                    
+                    
+                     <apex:tab label="Clients (Medium Potential)" >
+                       <apex:pageBlock title="Accounts">
+                        
+                       
+                        
+                        
+                        <apex:form id="form1">
+                        
+                    
+                        <apex:pageBlockTable value="{!accountsT2}" var="a" cellPadding="5" border="3" id="accountslisttier2">
+                
+                                    
+                                   <apex:column >
+                                 <apex:facet name="header">   
+                                <apex:commandLink action="{!ViewDataAccountsT2}" value="Account Name{!IF(sortExpression=='name',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort" rerender="accountslisttier2">
+                                 <apex:param value="name" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                </apex:commandLink>
+                                </apex:facet>
+                                <a href="/{!a.Id}" id="{!a.Id}" onblur="LookupHoverDetail.getHover('{!a.Id}').hide();" onfocus="LookupHoverDetail.getHover('{!a.Id}', '/{!a.Id}/m?retURL=%2F{!a.Id}&isAjaxRequest=1').show();" onmouseout="LookupHoverDetail.getHover('{!a.Id}').hide();" onmouseover="LookupHoverDetail.getHover('{!a.Id}', '/{!a.Id}/m?retURL=%2F{!a.Id}&isAjaxRequest=1').show();">{!a.Name}</a>                    
+                                  </apex:column>
+                                            
+                                        
+                                    <apex:column value="{!a.Client_Value__c}">
+                                 <apex:facet name="header">   
+                                <apex:commandLink action="{!ViewDataAccountsT2}" value="Client Value{!IF(sortExpression=='Client_Value__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort1" rerender="accountslisttier2">
+                                <apex:param value="Client_Value__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                </apex:commandLink>
+                                </apex:facet>
+                                   </apex:column>         
+                                                    
+                         
+                                  <apex:column value="{!a.Active_L12M__c}">
+                                <apex:facet name="header">   
+                               <apex:commandLink action="{!ViewDataAccountsT2}" value="Active L12M{!IF(sortExpression=='Active_L12M__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort2" rerender="accountslisttier2">
+                               <apex:param value="Active_L12M__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                               </apex:commandLink>
+                               </apex:facet>
+                                 </apex:column>         
+                                                          
+                                    
+                                    
+                                  <apex:column value="{!a.Revenue_To_Date__c}">
+                                <apex:facet name="header">   
+                               <apex:commandLink action="{!ViewDataAccountsT2}" value="Revenue To Date{!IF(sortExpression=='Revenue_To_Date__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort3" rerender="accountslisttier2">
+                               <apex:param value="Revenue_To_Date__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                               </apex:commandLink>
+                               </apex:facet>
+                                 </apex:column>       
+                                  
+                                  
+                                  
+                                  <apex:column value="{!a.Average_Opportunity_Value__c}">
+                                <apex:facet name="header">   
+                               <apex:commandLink action="{!ViewDataAccountsT2}" value="Average Opportunity Value{!IF(sortExpression=='Average_Opportunity_Value__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort4" rerender="accountslisttier2">
+                               <apex:param value="Average_Opportunity_Value__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                               </apex:commandLink>
+                               </apex:facet>
+                                 </apex:column>       
+                                  
+                                  
+                                  <apex:column value="{!a.OpportunitiesClosed__c}">
+                                <apex:facet name="header">   
+                               <apex:commandLink action="{!ViewDataAccountsT2}" value="Opportunities Closed{!IF(sortExpression=='OpportunitiesClosed__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort5" rerender="accountslisttier2">
+                               <apex:param value="OpportunitiesClosed__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                               </apex:commandLink>
+                               </apex:facet>
+                                 </apex:column>       
+                                  
+                                  
+                                  
+                                  
+                                   <apex:column value="{!a.Opportunity_Win_Ratio__c}">
+                                <apex:facet name="header">   
+                               <apex:commandLink action="{!ViewDataAccountsT2}" value="Opportunity Win Ratio{!IF(sortExpression=='Opportunity_Win_Ratio__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort6" rerender="accountslisttier2">
+                               <apex:param value="Opportunity_Win_Ratio__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                               </apex:commandLink>
+                               </apex:facet>
+                                 </apex:column>       
+                                    
+                                   </apex:pageBlockTable>
+                
+                             
+                                   </apex:form>  
+                        </apex:pageBlock>
+                
+                
+                        <apex:detail subject="{!$CurrentPage.parameters.cid}" relatedList="false" title="false"/>
+                    </apex:tab>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                     <apex:tab label="Users" >
+                            <apex:form id="form2">
+                                           <apex:pageBlock title="Contacts" id="contactslist">
+                                         
+                                             
+                                                       <apex:pageBlockTable value="{!ContactsToShow}" var="c" cellPadding="5" border="3">
+                                    
+                                    
+                                    
+                                    
+                                    
+                                                           <apex:column value="{!c.Contacted_30_days__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataContacts}" value="Contacted 30 days{!IF(sortExpression=='Contacted_30_days__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort11" rerender="contactslist">
+                                                        <apex:param value="Contacted_30_days__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                                                                
+                                                           <apex:column >
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataContacts}" value="Name{!IF(sortExpression=='Name',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort10" rerender="contactslist">
+                                                         <apex:param value="Name" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                        <a href="/{!c.Id}" id="{!c.Id}" onblur="LookupHoverDetail.getHover('{!c.Id}').hide();" onfocus="LookupHoverDetail.getHover('{!c.Id}', '/{!c.Id}/m?retURL=%2F{!c.Id}&isAjaxRequest=1').show();" onmouseout="LookupHoverDetail.getHover('{!c.Id}').hide();" onmouseover="LookupHoverDetail.getHover('{!c.Id}', '/{!c.Id}/m?retURL=%2F{!c.Id}&isAjaxRequest=1').show();">{!c.Name}</a>                    
+                                                          </apex:column>
+                                                                    
+                                                                
+                                                                                                                       
+                                                            <apex:column value="{!c.Account.Name}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataContacts}" value="Account Name{!IF(sortExpression=='Account.Name',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort12" rerender="contactslist">
+                                                        <apex:param value="Account.Name" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>   
+                                                           
+                                                                  
+                                                            <apex:column value="{!c.Office_Location__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataContacts}" value="Office Location{!IF(sortExpression=='Office_Location__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort13" rerender="contactslist">
+                                                        <apex:param value="Office_Location__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>   
+                                                           
+                                                                  
+                                                            <apex:column value="{!c.Phone}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataContacts}" value="Phone{!IF(sortExpression=='Phone',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort14" rerender="contactslist">
+                                                        <apex:param value="Phone" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>   
+                                                           
+                                                                  
+                                                            <apex:column value="{!c.Email}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataContacts}" value="Email{!IF(sortExpression=='Email',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort15" rerender="contactslist">
+                                                        <apex:param value="Email" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>   
+                                                           
+                                                                  
+                                                            <apex:column value="{!c.Created_Opp_Count__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataContacts}" value="Opportunities Created {!IF(sortExpression=='Created_Opp_Count__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort16" rerender="contactslist">
+                                                        <apex:param value="Created_Opp_Count__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>   
+                                                           
+                                                                  
+                                                            <apex:column value="{!c.Closed_Opp_Count__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataContacts}" value="Opportunities Closed{!IF(sortExpression=='Closed_Opp_Count__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort17" rerender="contactslist">
+                                                        <apex:param value="Closed_Opp_Count__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>        
+                                                           
+                                                          
+                                                           <apex:column value="{!c.User_Win_Ratio__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataContacts}" value="Win Ratio{!IF(sortExpression=='User_Win_Ratio__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort18" rerender="contactslist">
+                                                        <apex:param value="User_Win_Ratio__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>          
+                                       
+                                                       </apex:pageBlockTable>
+                                      
+                                    				 <apex:pageBlockButtons location="bottom">  
+                                                          <apex:commandButton value="<<" action="{!beginningCC}" disabled="{!DisablePreviousCC}" rerender="contactslist"/>
+             											  <apex:commandButton value="<" action="{!previousCC}" disabled="{!DisablePreviousCC}" rerender="contactslist"/>
+             											  <apex:commandButton value=">" action="{!nextCC}" disabled="{!DisableNextCC}" rerender="contactslist"/>
+            											  <apex:commandButton value=">>" action="{!lastCC}" disabled="{!DisableNextCC}" rerender="contactslist"/>            
+                                                       </apex:pageBlockButtons>
+                                  
+                                                 
+                                              
+                                           
+                                            </apex:pageBlock>
+                                      </apex:form>  
+                                    
+                                            <apex:detail subject="{!$CurrentPage.parameters.cid}" relatedList="false" title="false"/>
+                                        </apex:tab>
+                                        
+                                        
+                             <apex:tab label="Open Opportunities" >
+                                            <apex:form id="form3">
+                                                  <apex:pageBlock title="Open Opportunities" id="openopportunitieslist">
+                                                       <apex:pageBlockTable value="{!OpportunitiesToShow}" var="oo" cellPadding="5" border="3">
+                                    
+                                                           
+                                                                                         
+                                                            <apex:column value="{!oo.Health__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataOpenOpportunities}" value="Health{!IF(sortExpression=='Health__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort20" rerender="openopportunitieslist">
+                                                        <apex:param value="Health__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                                   
+                                                                   
+                                                          <apex:column value="{!oo.CreatedDate}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataOpenOpportunities}" value="Created Date{!IF(sortExpression=='CreatedDate',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort21" rerender="openopportunitieslist">
+                                                        <apex:param value="CreatedDate" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                                                                
+                                                           <apex:column >
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataOpenOpportunities}" value="Name{!IF(sortExpression=='Name',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort22" rerender="openopportunitieslist">
+                                                         <apex:param value="Name" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                        <a href="/{!oo.Id}" id="{!oo.Id}" onblur="LookupHoverDetail.getHover('{!oo.Id}').hide();" onfocus="LookupHoverDetail.getHover('{!oo.Id}', '/{!oo.Id}/m?retURL=%2F{!oo.Id}&isAjaxRequest=1').show();" onmouseout="LookupHoverDetail.getHover('{!oo.Id}').hide();" onmouseover="LookupHoverDetail.getHover('{!oo.Id}', '/{!oo.Id}/m?retURL=%2F{!oo.Id}&isAjaxRequest=1').show();">{!oo.Name}</a>                    
+                                                          </apex:column>
+                                                                   
+                                                             
+                                                             <apex:column value="{!oo.Delivery_Specialist__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataOpenOpportunities}" value="Delivery Specialist{!IF(sortExpression=='Delivery_Specialist__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort23" rerender="openopportunitieslist">
+                                                        <apex:param value="Delivery_Specialist__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                           
+                                                             <apex:column value="{!oo.StageName}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataOpenOpportunities}" value="Stage{!IF(sortExpression=='StageName',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort24" rerender="openopportunitieslist">
+                                                        <apex:param value="StageName" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                           
+                                                             <apex:column value="{!oo.Forecast_Judgment__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataOpenOpportunities}" value="Forecast Judgment{!IF(sortExpression=='Forecast_Judgment__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort25" rerender="openopportunitieslist">
+                                                        <apex:param value="Forecast_Judgment__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                           
+                                                             <apex:column value="{!oo.Weighted_Probability__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataOpenOpportunities}" value="Weighted Probability{!IF(sortExpression=='Weighted_Probability__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort26" rerender="openopportunitieslist">
+                                                        <apex:param value="Weighted_Probability__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                           
+                                                             <apex:column value="{!oo.Opportunity_Commission_Rate__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataOpenOpportunities}" value="Opportunity Commission Rate{!IF(sortExpression=='Opportunity_Commission_Rate__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort27" rerender="openopportunitieslist">
+                                                        <apex:param value="Opportunity_Commission_Rate__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                           
+                                                             <apex:column value="{!oo.MBA_Co_Commission__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataOpenOpportunities}" value="MBA Co Commission{!IF(sortExpression=='MBA_Co_Commission__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort28" rerender="openopportunitieslist">
+                                                        <apex:param value="MBA_Co_Commission__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                           
+                                                             <apex:column value="{!oo.CloseDate}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataOpenOpportunities}" value="Closed Date{!IF(sortExpression=='CloseDate',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort29" rerender="openopportunitieslist">
+                                                        <apex:param value="CloseDate" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                           
+                                                             <apex:column value="{!oo.NextStep}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataOpenOpportunities}" value="Next Step{!IF(sortExpression=='NextStep',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort30" rerender="openopportunitieslist">
+                                                        <apex:param value="NextStep" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                           
+                                                             <apex:column value="{!oo.Days_Open__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataOpenOpportunities}" value="Days Open{!IF(sortExpression=='Days_Open__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort31" rerender="openopportunitieslist">
+                                                        <apex:param value="Days_Open__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                                 
+                                                          
+                                     
+                                                       </apex:pageBlockTable>
+                                                    
+                                    				 <apex:pageBlockButtons location="bottom">  
+                                                          <apex:commandButton value="<<" action="{!beginningOO}" disabled="{!DisablePreviousOO}" rerender="openopportunitieslist"/>
+             											  <apex:commandButton value="<" action="{!previousOO}" disabled="{!DisablePreviousOO}" rerender="openopportunitieslist"/>
+             											  <apex:commandButton value=">" action="{!nextOO}" disabled="{!DisableNextOO}" rerender="openopportunitieslist"/>
+            											  <apex:commandButton value=">>" action="{!lastOO}" disabled="{!DisableNextOO}" rerender="openopportunitieslist"/>            
+                                                       </apex:pageBlockButtons>
+                                    
+                                              
+                                            </apex:pageBlock>
+                                    
+                                                   
+                                             </apex:form>  
+                                            <apex:detail subject="{!$CurrentPage.parameters.cid}" relatedList="false" title="false"/>
+                                        </apex:tab>
+                                        
+                                        
+                                                     
+                             <apex:tab label="Closed Opportunities" >
+                                 
+                                  <apex:form id="form4">
+                                           <apex:pageBlock title="Closed Opportunities" id="closedopportunitieslist">
+                                           
+                                             
+                                                       <apex:pageBlockTable value="{!ClosedOpportunitiesToShow}" var="co" cellPadding="5" border="3">
+                                    
+                                                               
+                                                             
+                                                                                      
+                                                            <apex:column value="{!co.Health__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataClosedOpportunities}" value="Health{!IF(sortExpression=='Health__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort312" rerender="closedopportunitieslist">
+                                                        <apex:param value="Health__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                                   
+                                                                   
+                                                          <apex:column value="{!co.CreatedDate}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataClosedOpportunities}" value="Created Date{!IF(sortExpression=='CreatedDate',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort313" rerender="closedopportunitieslist">
+                                                        <apex:param value="CreatedDate" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                                                                
+                                                           <apex:column >
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataClosedOpportunities}" value="Name{!IF(sortExpression=='Name',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort314" rerender="closedopportunitieslist">
+                                                         <apex:param value="Name" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                        <a href="/{!co.Id}" id="{!co.Id}" onblur="LookupHoverDetail.getHover('{!co.Id}').hide();" onfocus="LookupHoverDetail.getHover('{!co.Id}', '/{!co.Id}/m?retURL=%2F{!co.Id}&isAjaxRequest=1').show();" onmouseout="LookupHoverDetail.getHover('{!co.Id}').hide();" onmouseover="LookupHoverDetail.getHover('{!co.Id}', '/{!co.Id}/m?retURL=%2F{!co.Id}&isAjaxRequest=1').show();">{!co.Name}</a>                    
+                                                          </apex:column>
+                                                                   
+                                                             
+                                                             <apex:column value="{!co.Delivery_Specialist__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataClosedOpportunities}" value="Delivery Specialist{!IF(sortExpression=='Delivery_Specialist__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort32" rerender="closedopportunitieslist">
+                                                        <apex:param value="Delivery_Specialist__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                           
+                                                             <apex:column value="{!co.StageName}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataClosedOpportunities}" value="Stage{!IF(sortExpression=='StageName',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort33" rerender="closedopportunitieslist">
+                                                        <apex:param value="StageName" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                           
+                                                             <apex:column value="{!co.Forecast_Judgment__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataCLosedOpportunities}" value="Forecast Judgment{!IF(sortExpression=='Forecast_Judgment__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort34" rerender="closedopportunitieslist">
+                                                        <apex:param value="Forecast_Judgment__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                           
+                                                             <apex:column value="{!co.Weighted_Probability__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataClosedOpportunities}" value="Weighted Probability{!IF(sortExpression=='Weighted_Probability__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort35" rerender="closedopportunitieslist">
+                                                        <apex:param value="Weighted_Probability__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                           
+                                                             <apex:column value="{!co.Opportunity_Commission_Rate__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataClosedOpportunities}" value="Opportunity Commission Rate{!IF(sortExpression=='Opportunity_Commission_Rate__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort351" rerender="closedopportunitieslist">
+                                                        <apex:param value="Opportunity_Commission_Rate__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                           
+                                                             <apex:column value="{!co.MBA_Co_Commission__c}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataClosedOpportunities}" value="MBA Co Commission{!IF(sortExpression=='MBA_Co_Commission__c',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort36" rerender="closedopportunitieslist">
+                                                        <apex:param value="MBA_Co_Commission__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+                                                           
+                                                                                                          
+                                                                              
+                                                             <apex:column value="{!co.CloseDate}">
+                                                         <apex:facet name="header">   
+                                                        <apex:commandLink action="{!ViewDataClosedOpportunities}" value="Closed Date{!IF(sortExpression=='CloseDate',IF(sortDirection='ASC','▼','▲'),'')}" id="cmdSort39" rerender="closedopportunitieslist">
+                                                        <apex:param value="CloseDate" name="column" assignTo="{!sortExpression}" ></apex:param>
+                                                        </apex:commandLink>
+                                                        </apex:facet>
+                                                           </apex:column>  
+               
+                                     
+                                                       </apex:pageBlockTable>
+                                    
+                                    						  
+                                    				 <apex:pageBlockButtons location="bottom">  
+                                                          <apex:commandButton value="<<" action="{!beginningCO}" disabled="{!DisablePreviousCO}" rerender="closedopportunitieslist"/>
+             											  <apex:commandButton value="<" action="{!previousCO}" disabled="{!DisablePreviousCO}" rerender="closedopportunitieslist"/>
+             											  <apex:commandButton value=">" action="{!nextCO}" disabled="{!DisableNextCO}" rerender="closedopportunitieslist"/>
+            											  <apex:commandButton value=">>" action="{!lastCO}" disabled="{!DisableNextCO}" rerender="closedopportunitieslist"/>            
+                                                       </apex:pageBlockButtons>
+                                                       
+                               
+                                            </apex:pageBlock>
+                                         </apex:form>  
+                                    
+                                    
+                                            <apex:detail subject="{!$CurrentPage.parameters.cid}" relatedList="false" title="false"/>
+                                        </apex:tab>
+                                        
+                         
+    </apex:tabPanel>
+
+</apex:page>
